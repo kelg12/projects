@@ -1,17 +1,86 @@
 # Findings
 
-## Problems Identified
+## Initial Symptoms
 
-- One screw securing the HDD to the bracket was stripped already (somehow), so the bracket had to be removed along with the HDD itself.
-- HFS+ file system is not readable by Windows, HFSExplorer was used to be able to mount/view HDD
-- HFSExplorer was unable to view file system contents
-- CrystalDiskInfo showed signs of drive degradation, with 200 Current Pending Sectors and 200 Uncorrectable Sectors
-- Attempted to use DMDE to bypass bad sectors and view file system, but this returned more signs of damaged sectors
-- Connected HDD to my Linux homelab machine to attempt to image the drive with `ddrescue` and prevent further degradation
-- Could not mount drive successfully in Linux and drive showed more severely degraded compared to intial SMART info after `smartctl` scan
+- iMac powered on successfully.
+- Startup chime was present.
+- Display remained on a blank white screen.
+- Operating system did not boot.
 
-## Solution
+## Drive Identification
 
-- Used PhotoRec to extract specific file types (.jpg, .png, .mov, .pdf, etc.) from HDD since boot sector had degraded and prevented mounting
-- Transferred files from homelab machine to USB drive with ```rsync -avh --progress /root/recup_dir.* /mnt/usb/```
-- Happily surprised my father with his long lost photos and documents =)
+Drive Model:
+- Western Digital WD10EAVS
+
+Filesystem:
+- Apple HFS+
+
+Capacity:
+- 1TB
+
+## Windows Analysis
+
+### HFSExplorer
+
+Observed behavior:
+- Filesystem could not be loaded.
+- Reported zero-byte results.
+
+### DMDE
+
+Observed behavior:
+- GPT partition table detected.
+- HFS+ partitions identified.
+- Metadata visible.
+- User files inaccessible.
+
+### CrystalDiskInfo
+
+Initial SMART review indicated pending and uncorrectable sectors.
+
+## Linux Analysis
+
+### fdisk
+
+Successfully detected:
+- EFI partition
+- HFS+ partition (~931 GB)
+
+### Mount attempt
+
+Mounting failed due to filesystem errors.
+
+Error:
+"Can't read superblock"
+
+### Kernel Logs
+
+dmesg reported:
+- Unrecovered read errors
+- Critical medium errors
+- Buffer I/O errors
+- Failed root directory loading
+
+### SMART Analysis
+
+Notable attributes:
+- Current Pending Sectors: 91
+- Offline Uncorrectable Sectors: 22
+
+Conclusion:
+Filesystem metadata was likely damaged while significant user data remained readable.
+
+### Recovery Outcome
+
+PhotoRec successfully recovered:
+
+- JPEG images
+- PNG images
+- GIF images
+- Videos
+- Miscellaneous user files (.doc, .docx, .xls, .xlsx, .pdf, etc)
+
+Recovered EXIF metadata confirmed the presence of family photos taken on Apple devices.
+
+Conclusion:
+Filesystem structures were corrupted, but raw file data remained largely recoverable.
