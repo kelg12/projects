@@ -29,12 +29,6 @@ The objective was to recover family photos, videos, and personal documents from 
 - PhotoRec
 - Python 3
 
-## Initial Symptoms
-
-- Startup chime present
-- White screen after power-on
-- No visible desktop or splash screen
-
 ## Recovery Procedure
 
 1. Researched disassembly process for Apple iMac model A1224.
