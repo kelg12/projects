@@ -25,6 +25,7 @@ Capacity:
 Observed behavior:
 - Filesystem could not be loaded.
 - Reported zero-byte results.
+![HFSExplorer unable to load Filesystem](images/hfsexplorer-error.png)
 
 ### DMDE
 
@@ -33,10 +34,12 @@ Observed behavior:
 - HFS+ partitions identified.
 - Metadata visible.
 - User files inaccessible.
+![DMDE CRC error](images/dmde-errors.png)
 
 ### CrystalDiskInfo
 
 Initial SMART review indicated pending and uncorrectable sectors.
+![CrystalDiskInfo SMART warning](images/crystaldiskinfo.png)
 
 ## Linux Analysis
 
@@ -60,12 +63,14 @@ dmesg reported:
 - Critical medium errors
 - Buffer I/O errors
 - Failed root directory loading
+![dmesg logs](images/dmesg-logs.png)
 
 ### SMART Analysis
 
 Notable attributes:
 - Current Pending Sectors: 91
 - Offline Uncorrectable Sectors: 22
+![SMARTctl scan](images/smartctl-info.png)
 
 Conclusion:
 Filesystem metadata was likely damaged while significant user data remained readable.
@@ -79,6 +84,7 @@ PhotoRec successfully recovered:
 - GIF images
 - Videos
 - Miscellaneous user files (.doc, .docx, .xls, .xlsx, .pdf, etc)
+![PhotoRec scan](images/photorec-scan.png)
 
 Recovered EXIF metadata confirmed the presence of family photos taken on Apple devices.
 
