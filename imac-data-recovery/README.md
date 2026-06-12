@@ -41,7 +41,7 @@ The objective was to recover family photos, videos, and personal documents from 
 8. Analyzed Linux kernel error logs.
 9. Attempted read-only HFS+ mounting.
 10. Performed file carving with PhotoRec.
-11. Developed a Python script to organize recovered files.
+11. Developed Python scripts to organize recovered files.
 12. Removed duplicates and sorted files by type.
 
 ## Results
