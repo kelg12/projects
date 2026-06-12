@@ -31,11 +31,9 @@ Choose recovery tools based on the failure type rather than repeatedly attemptin
 
 ### Automation Saves Significant Time
 
-More than 100,000 files were recovered.
+More than 100,000 files were recovered so manual sorting was not practical.
 
-Manual sorting was not practical.
-
-A custom Python script automated organization and duplicate identification.
+Multiple Python scripts automated organization and duplicate identification.
 
 Lesson:
 Small automation efforts can eliminate hours of repetitve work.
